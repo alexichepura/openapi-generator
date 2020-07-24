@@ -1,20 +1,23 @@
 {{#apiInfo}}
-{{#apis}}
 
+{{#apis}}
 {{#operations}}
 export * from './{{ classFilename }}';
 import { {{ classname }}Methods } from './{{ classFilename }}';
 {{/operations}}
 
-export const methods = {
-{{#operations}}
-  {{classname}}: {{ classname }}Methods
-{{/operations}}
-}
-
 {{#withInterfaces}}
 export * from './{{ classFilename }}Interface'
 {{/withInterfaces}}
-
 {{/apis}}
+
+export const methods = {
+{{#apis}}
+{{#operations}}
+  {{classname}}: {{ classname }}Methods
+{{/operations}}
+{{/apis}}
+}
+
 {{/apiInfo}}
+
