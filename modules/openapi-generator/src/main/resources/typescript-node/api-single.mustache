@@ -18,7 +18,7 @@ export const {{classname}}Methods = [
 {{/operations}}
 
 {{#operations}}
-export type T{{classname}} = {
+export type {{classname}} = {
   {{#operation}}
   {{nickname}} ({{#allParams}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}, {{/allParams}}options?: {headers: {[name: string]: string}}): Promise<{ {{#returnType}}body: {{{returnType}}}; {{/returnType}}{{^returnType}}body?: any; {{/returnType}} }>
   {{/operation}}
