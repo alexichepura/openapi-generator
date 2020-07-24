@@ -1,7 +1,6 @@
 {{>licenseInfo}}
 {{#models}}
 {{#model}}
-import { RequestFile } from '../api';
 {{#tsImports}}
 import { {{classname}} } from '{{filename}}';
 {{/tsImports}}
@@ -12,7 +11,7 @@ import { {{classname}} } from '{{filename}}';
 */
 {{/description}}
 {{^isEnum}}
-export class {{classname}} {{#parent}}extends {{{parent}}} {{/parent}}{
+export interface {{classname}} {{#parent}}extends {{{parent}}} {{/parent}}{
 {{#vars}}
 {{#description}}
     /**
@@ -21,35 +20,6 @@ export class {{classname}} {{#parent}}extends {{{parent}}} {{/parent}}{
 {{/description}}
     '{{name}}'{{^required}}?{{/required}}: {{#isEnum}}{{{datatypeWithEnum}}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{#isNullable}} | null{{/isNullable}}{{/isEnum}};
 {{/vars}}
-
-    {{#discriminator}}
-    static discriminator: string | undefined = "{{discriminatorName}}";
-    {{/discriminator}}
-    {{^discriminator}}
-    static discriminator: string | undefined = undefined;
-    {{/discriminator}}
-
-    {{^isArrayModel}}
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {{#vars}}
-        {
-            "name": "{{name}}",
-            "baseName": "{{baseName}}",
-            "type": "{{#isEnum}}{{{datatypeWithEnum}}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}"
-        }{{#hasMore}},
-        {{/hasMore}}
-        {{/vars}}
-    ];
-
-    static getAttributeTypeMap() {
-        {{#parent}}
-        return super.getAttributeTypeMap().concat({{classname}}.attributeTypeMap);
-        {{/parent}}
-        {{^parent}}
-        return {{classname}}.attributeTypeMap;
-        {{/parent}}
-    }
-    {{/isArrayModel}}
 }
 
 {{#hasEnums}}
