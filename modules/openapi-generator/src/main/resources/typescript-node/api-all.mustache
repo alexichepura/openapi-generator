@@ -11,6 +11,14 @@ export * from './{{ classFilename }}Interface'
 {{/withInterfaces}}
 {{/apis}}
 
+export type Api = {
+{{#apis}}
+{{#operations}}
+  {{classname}}: {{ classname }}
+{{/operations}}
+{{/apis}}
+}
+
 export const methods = {
 {{#apis}}
 {{#operations}}
