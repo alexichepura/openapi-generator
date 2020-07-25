@@ -3,6 +3,7 @@
 {{#apis}}
 {{#operations}}
 export * from './{{ classFilename }}';
+import { {{ classname }} } from './{{ classFilename }}';
 import { {{ classname }}Methods } from './{{ classFilename }}';
 {{/operations}}
 
